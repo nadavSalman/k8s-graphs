@@ -3,7 +3,7 @@ from pyvis.network import Network
 import networkx as nx
 import os
 import logging
-from resources_inventory.incentory import k8s_supported_resources
+from ..resources_inventory.inventory import k8s_supported_resources
 
 
 class GraphGenerator():

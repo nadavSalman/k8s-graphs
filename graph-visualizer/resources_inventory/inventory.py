@@ -1,5 +1,3 @@
-
-
 k8s_supported_resources  = {
     "Pod": {
         "api_version": "v1"

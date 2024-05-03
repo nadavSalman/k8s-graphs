@@ -2,8 +2,9 @@ from flask import Flask, render_template, request
 from pyvis.network import Network
 import networkx as nx
 import os
-from k8s_resources.resources import create_resources_bp
-from resources_inventory.incentory import k8s_supported_resources
+from .resources_inventory.inventory import k8s_supported_resources
+from .k8s_resources.resources import create_resources_bp
+
 
 app = Flask(__name__)
 

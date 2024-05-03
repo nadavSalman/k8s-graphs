@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request
-from resources_inventory.incentory import k8s_supported_resources
-from graph_generator.generator import GraphGenerator
+from ..graph_generator.generator import GraphGenerator
 from flask import current_app
 from pyvis.network import Network
 import networkx as nx
