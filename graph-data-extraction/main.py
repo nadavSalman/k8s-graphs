@@ -5,7 +5,7 @@ import pprint as pp
 
 
 
-def extractedpods_data(k8s_client: client.CoreV1Api):
+def extracted_pods_data(k8s_client: client.CoreV1Api):
     all_namespases_pods: list = k8s_client.list_pod_for_all_namespaces().to_dict().get('items')
     all_pods_extract_data = []
     for pod in all_namespases_pods:
@@ -35,7 +35,7 @@ def main():
     config.load_kube_config()
     k8s_client = client.CoreV1Api()
         
-    all_pods_extract_data = extractedpods_data(k8s_client)
+    all_pods_extract_data = extracted_pods_data(k8s_client)
     pp.pprint(all_pods_extract_data[-1])
     
     
