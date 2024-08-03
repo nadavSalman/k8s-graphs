@@ -3,7 +3,7 @@ from pyvis.network import Network
 import networkx as nx
 import os
 import logging
-from ..resources_inventory.inventory import k8s_supported_resources
+from resources_inventory.inventory import k8s_supported_resources
 
 
 class GraphGenerator():
@@ -17,11 +17,23 @@ class GraphGenerator():
         for kv in k8s_supported_resources.items():
             result[kv[0].lower()] = kv[0]
         print(f"{result = }")
+        current_app.logger.info(f"Initialized view names for resources: {result}")
         return result
     
     
     
-    def generate(self, resource_name: str):
+    def generate(self, resource_name: str,templets_path:str):
+
+        
+
+
+        # Here shold be an api call to the data-extraction service to get the data for the graph.
+        # Request to [data-extraction-service]:/resources/<resource_name> 
+        
+
+
+
+
         self.net = Network(notebook=True,height="1500px", width="100%", bgcolor="#222222", font_color="white")
         
         
@@ -45,8 +57,8 @@ class GraphGenerator():
         
         statis_file_name = statis_file_base_name.split('.')[0] + resource_name + "."+ statis_file_base_name.split('.')[1]
         statis_file_name = statis_file_name.split(".")[0] + ".html"
-        full_path = f"{os.getcwd()}/templates/{statis_file_name}"
-        logging.info(f"Generating graph with file name: {statis_file_name}")
+        full_path = f"{templets_path}/{statis_file_name}"
+        logging.info(f"Generating graph with file name: {statis_file_name} , full path: {full_path}")
 
         try:
             self.net.show(full_path)

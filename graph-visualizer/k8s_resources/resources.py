@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request
-from ..graph_generator.generator import GraphGenerator
+from graph_generator.generator import GraphGenerator
 from flask import current_app
 from pyvis.network import Network
 import networkx as nx
@@ -40,7 +40,7 @@ def create_resource_graph(resource_name: str):
     current_app.logger.info(f"Created network graph at templates/{statis_file_name}.")
     return statis_file_name
 
-def create_resources_bp(resource_type: str,bp_name) -> Blueprint:
+def create_resources_bp(resource_type: str,bp_name,templets_path:str) -> Blueprint:
     k8s_resources_bp = Blueprint(bp_name,__name__)
      
     @k8s_resources_bp.route(f'/{resource_type.lower()}', methods=["GET"])
@@ -49,7 +49,7 @@ def create_resources_bp(resource_type: str,bp_name) -> Blueprint:
         
         graph_generator = GraphGenerator()
         # html_file_path = create_resource_graph(resource_type.lower())
-        html_file_path = graph_generator.generate(resource_type.lower()) 
+        html_file_path = graph_generator.generate(resource_type.lower(),templets_path) 
         print(f"html file path {html_file_path}")
         # current_app.logger.info(f"{create_resource_graph(resource_type.lower()) = }")
         return render_template(html_file_path)
