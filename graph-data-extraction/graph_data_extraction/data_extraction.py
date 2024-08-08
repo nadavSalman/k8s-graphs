@@ -2,6 +2,8 @@ from kubernetes import client, config
 import json
 import pprint as pp
 from flask import current_app
+from pyvis import network as net
+from  graph_data_extraction.graph_creator import GraphCreator
 
 
 class K8sResourcesDataExtraction:
@@ -32,11 +34,20 @@ class K8sResourcesDataExtraction:
                 'labels': pod['metadata']['labels'],
                 'volume': pod_volumes,
             })
-        return all_pods_extract_data
+
+        # return pyvis graph object
+        graph_creator = GraphCreator()        
+        graph:net = graph_creator.create_pod_graph(pod_data=all_pods_extract_data)
+
+        
+        # return all_pods_extract_data
+        return graph
+    
 
     # Dynamic function call resolver   
     def solve_for(self, name: str, *args, **kwargs):
-        current_app.logger.info(f"{dir(self) =} ")
         if hasattr(self, name) and callable(func := getattr(self, name)):
             current_app.logger.info(f"Resolve function for resource : {name}")
             return func(*args, **kwargs)
+        else:
+            current_app.logger.error(f"Faile to resolve function for resource : {name}")
