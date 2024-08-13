@@ -26,6 +26,14 @@ def create_resources_bp(resource_type: str,k8s_client: client.CoreV1Api) -> Blue
             k8s_client=k8s_client)
         
 
+        # Serialize Options : 
+        
+        # Create a graph with a single edge from a dictionary of dictionaries - https://networkx.org/documentation/stable/reference/convert.html#converting-to-and-from-other-data-formats
+
+        # to_dict_of_dicts(G[, nodelist, edge_data])
+        # Returns adjacency representation of graph as a dictionary of dictionaries.
+
+
         # Serialize the graph to GML (GraphML) format
         output = BytesIO()
         nx.write_gml(nx_graph, output)

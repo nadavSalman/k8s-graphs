@@ -12,3 +12,6 @@ app.register_blueprint(
         k8s_client=k8s_client,
     )
 )
+
+if __name__ == '__main__':
+    app.run(debug=True)
