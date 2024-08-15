@@ -23,7 +23,9 @@ class GraphGenerator():
     def generate(self, resource_name: str,templets_path:str,nx_graph:nx):
 
         current_app.logger.info(f"Attenpting to create graph fro resource : {resource_name}")
-        self.net = Network(notebook=True,height="1500px", width="100%", bgcolor="#222222", font_color="white",cdn_resources="local")
+
+        # self.net = Network(notebook=True,cdn_resources="in_line",bgcolor="#222222", font_color="white",filter_menu=True,height="1000", width="100%")
+        self.net = Network(notebook=True,cdn_resources="in_line",bgcolor="#222222", font_color="white",height="1000", width="100%")
         
         self.net.from_nx(nx_graph) # Convert networkx graph to pyvis Network 
         
