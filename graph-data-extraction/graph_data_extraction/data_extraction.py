@@ -9,8 +9,7 @@ from  graph_data_extraction.graph_creator import GraphCreator
 class K8sResourcesDataExtraction:
 
     def __init__(self):
-        self.doc_str = ""
-    
+        self.doc_str = ""  
 
     def extracted_pods_data(self, k8s_client: client.CoreV1Api):
         all_namespases_pods: list = k8s_client.list_pod_for_all_namespaces().to_dict().get('items')
@@ -43,7 +42,6 @@ class K8sResourcesDataExtraction:
         # return all_pods_extract_data
         return graph
     
-
     # Dynamic function call resolver   
     def solve_for(self, name: str, *args, **kwargs):
         if hasattr(self, name) and callable(func := getattr(self, name)):

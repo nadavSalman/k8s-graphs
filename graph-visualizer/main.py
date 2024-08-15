@@ -36,6 +36,7 @@ def call_delete_files_in_templates_directory(response):
     return response
 
 for resource in k8s_supported_resources.keys():
+    app.logger.info(f"Initialized view names for resource: {resource}")
     app.register_blueprint(
         create_resources_bp(
             resource_type=resource,
