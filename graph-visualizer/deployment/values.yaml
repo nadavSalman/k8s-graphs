@@ -75,11 +75,11 @@ resources: {}
 livenessProbe:
   httpGet:
     path: /endpoints
-    port: http
+    port: 5000
 readinessProbe:
   httpGet:
     path: /endpoints
-    port: http
+    port: 5000
 
 autoscaling:
   enabled: false
